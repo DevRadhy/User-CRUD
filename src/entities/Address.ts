@@ -1,4 +1,4 @@
-export class User {
+export class Address {
   adress: string;
   number: string;
   comlement: string;
@@ -7,7 +7,7 @@ export class User {
   city: string;
   uf: string;
 
-  constructor(props: User) {
+  constructor(props: Address) {
     Object.assign(this, props);
   }
 }
