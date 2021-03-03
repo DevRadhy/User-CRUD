@@ -1,8 +1,11 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
 
-@Entity('address')
+@Entity('addresses')
 export class Address {
-  @ PrimaryColumn()
+  @PrimaryColumn()
+  user_id: string;
+
+  @Column()
   adress: string;
 
   @Column()
@@ -18,7 +21,7 @@ export class Address {
   city: string;
 
   @Column()
-  uf: string;
+  state: string;
 
   constructor(props: Address) {
     Object.assign(this, props);
