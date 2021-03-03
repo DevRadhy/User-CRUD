@@ -15,3 +15,12 @@ export interface IDeleteUser {
   id: string;
   email: string;
 }
+
+export enum Ethnicities {
+  Brancos = 1,
+  Pardos,
+  Pretos,
+  Amarelos,
+  Indígenas,
+  Outros,
+}

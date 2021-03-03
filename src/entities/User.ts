@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Ethnicities } from '../controllers/useCases/UserDTO';
 
 @Entity('users')
 export class User {
@@ -22,7 +23,7 @@ export class User {
   weight: number;
 
   @Column()
-  color: string;
+  ethnicity: Ethnicities;
 
   constructor(props: Omit<User, "id">, id?: string) {
     Object.assign(this, props);
