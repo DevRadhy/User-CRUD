@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { Ethnicities } from '../controllers/useCases/UserDTO';
+import { Ethnicities } from '../controllers/useCases//userUseCases/UserDTO';
 
 @Entity('users')
 export class User {

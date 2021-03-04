@@ -1,6 +1,6 @@
 import { CreateUserUseCase } from "./CreateUserUseCase";
-import { UserController } from "../UserController";
-import { UserRepository } from "../../database/UserRepository";
+import { UserController } from "../..//UserController";
+import { UserRepository } from "../../../database/UserRepository";
 import { DeleteUserUseCase } from "./DeleteUserUseCase";
 import { UpdateUserUseCase } from "./UpdateUserUseCase";
 import { ShowUserUseCase } from "./ShowUserUseCase";

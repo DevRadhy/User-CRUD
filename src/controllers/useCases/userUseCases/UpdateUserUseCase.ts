@@ -1,4 +1,4 @@
-import { UserRepository } from "../../database/UserRepository";
+import { UserRepository } from "../../../database/UserRepository";
 import { ICreateUser } from "./UserDTO";
 
 export class UpdateUserUseCase {

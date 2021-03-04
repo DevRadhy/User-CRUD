@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
-import { CreateUserUseCase } from "./useCases/CreateUserUseCase";
-import { DeleteUserUseCase } from "./useCases/DeleteUserUseCase";
-import { ShowUserUseCase } from "./useCases/ShowUserUseCase";
-import { UpdateUserUseCase } from "./useCases/UpdateUserUseCase";
+import { CreateUserUseCase } from "./useCases/userUseCases/CreateUserUseCase";
+import { DeleteUserUseCase } from "./useCases/userUseCases/DeleteUserUseCase";
+import { ShowUserUseCase } from "./useCases/userUseCases/ShowUserUseCase";
+import { UpdateUserUseCase } from "./useCases/userUseCases/UpdateUserUseCase";
 
 export class UserController {
    constructor(
@@ -20,7 +20,8 @@ export class UserController {
       phone,
       weight,
       ethnicity_id,
-      address, } = request.body;
+      address, 
+    } = request.body;
 
       try {
         const user = await this.createUserUseCase.create({

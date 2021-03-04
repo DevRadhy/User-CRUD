@@ -1,7 +1,8 @@
-import { UserRepository } from "../../database/UserRepository";
-import { Address, CEP, City, State } from "../../entities/Address";
-import { User } from "../../entities/User";
+import { UserRepository } from "../../../database/UserRepository";
+import { User } from "../../../entities/User";
 import { Ethnicities, ICreateUser } from "./UserDTO";
+
+import { createAddressUseCase } from "../addressUseCases";
 
 export class CreateUserUseCase {
   constructor(
@@ -26,26 +27,20 @@ export class CreateUserUseCase {
 
     const user = await new User(userData);
 
-    console.log(user)
-
-    const cep = new CEP({cep: address.cep})
-    const city = new City({city: address.city})
-    const state = new State({state: address.state})
-
-    const { cep_id, city_id, state_id } = await this.userRepository.getPrimaryAddress(cep.cep, city.city, state.state);
-
-    const userAddress = await new Address({
+    const addressData = {
       user_id: user.id,
       address: address.address,
       number: address.number,
       complement: address.complement,
-      cep_id,
-      city_id,
-      state_id,
-    });
-
-    const createUser = this.userRepository.create(user, userAddress);
+      cep: address.cep,
+      city: address.city,
+      state: address.state,
+    }
     
-    return createUser;
+    const createUser = this.userRepository.create(user);
+
+    const userAddress = await createAddressUseCase.create(addressData);
+    
+    return { createUser, userAddress };
   }
 }
