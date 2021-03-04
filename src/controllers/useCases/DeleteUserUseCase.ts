@@ -1,20 +1,22 @@
 import { UserRepository } from "../../database/UserRepository";
-import { ICreateUser } from "./UserDTO";
+import { IDeleteUser } from "./UserDTO";
 
-export class UpdateUserUseCase {
+export class DeleteUserUseCase {
   constructor(
     private userRepository: UserRepository,
   ){}
   
-  async execute(id: string, user: ICreateUser) {
+  async delete(data: IDeleteUser) {
     const userAlreadyExists = true;
 
     if (!userAlreadyExists) {
       throw new Error('User do not exists.');
     }
 
-    const updateUser = await this.userRepository.execute(id, user);
+    // const deleteUser = await this.userRepository.delete(data);
 
-    return updateUser;
+    // console.log(deleteUser)
+
+    return this.userRepository.delete(data);
   }
 }

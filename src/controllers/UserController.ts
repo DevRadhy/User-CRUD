@@ -1,18 +1,26 @@
 import { Request, Response } from "express";
 import { CreateUserUseCase } from "./useCases/CreateUserUseCase";
+import { DeleteUserUseCase } from "./useCases/DeleteUserUseCase";
+import { ShowUserUseCase } from "./useCases/ShowUserUseCase";
+import { UpdateUserUseCase } from "./useCases/UpdateUserUseCase";
 
 export class UserController {
    constructor(
-    private createUserUseCase: CreateUserUseCase
+    private createUserUseCase: CreateUserUseCase,
+    private deleteUserUseCase: DeleteUserUseCase,
+    private updateUserUseCase: UpdateUserUseCase,
+    private showUserUseCase: ShowUserUseCase,
    ) {}
 
   async create(request: Request, response: Response): Promise<Response> {
-    const { name,
+    const { 
+      name,
       age,
       email,
       phone,
       weight,
-      color, } = request.body;
+      ethnicity_id,
+      address, } = request.body;
 
       try {
         const user = await this.createUserUseCase.create({
@@ -21,7 +29,8 @@ export class UserController {
           email,
           phone,
           weight,
-          color,
+          ethnicity_id,
+          address,
         });
 
         return response.status(201).json(user);
@@ -30,5 +39,76 @@ export class UserController {
           error: err.message
         });
       }
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const { id, email } = request.body;
+
+    try {
+      const user = await this.deleteUserUseCase.delete({ id, email });
+
+      return response.status(200).json(user);
+    }catch (err) {
+      return response.status(400).json({
+        error: err.message
+      });
+    }
+  }
+
+  async execute(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+    const {
+      name,
+      age,
+      email,
+      phone,
+      weight,
+      ethnicity_id,
+      address } = request.body
+
+    try {
+      const user = await this.updateUserUseCase.execute(
+        id,
+        {
+        name,
+        age,
+        email,
+        phone,
+        weight,
+        ethnicity_id,
+        address, });
+
+      return response.json({ id: user });
+    }catch (err) {
+      return response.status(400).json({
+        error: err.message
+      });
+    }
+  }
+
+  async index(request: Request, response: Response): Promise<Response> {
+    const { id } = request.params;
+
+    try {
+      const user = await this.showUserUseCase.index(id);
+
+      return response.json(user);
+    }catch (err) {
+      return response.status(400).json({
+        error: err.message
+      })
+    }
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    try {
+      const users = await this.showUserUseCase.show();
+
+      return response.json(users);
+    }catch (err) {
+      return response.status(400).json({
+        error: err.message
+      })
+    }
   }
 }

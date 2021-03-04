@@ -4,7 +4,16 @@ export interface ICreateUser {
   email: string;
   phone: string;
   weight: number;
-  color: string;
+  ethnicity_id: Ethnicities;
+  address: {
+    user_id: string,
+    address: string,
+    number: number,
+    complement: string,
+    cep: string,
+    city: string,
+    state: string,
+  };
 }
 
 export interface IUser extends ICreateUser {
