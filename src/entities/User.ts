@@ -22,14 +22,17 @@ export class User {
   @Column()
   weight: number;
 
-  @Column()
-  ethnicity: Ethnicities;
+  @Column({
+    type: 'enum',
+    enum: Ethnicities,
+  })
+  ethnicity_id: string;
 
   constructor(props: Omit<User, "id">, id?: string) {
     Object.assign(this, props);
 
     if (!id) {
-      id = uuidv4();
+      this.id = uuidv4();
     }
   }
 }
