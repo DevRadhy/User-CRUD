@@ -13,10 +13,6 @@ export class DeleteAddressUseCase {
       throw new Error('User do not exists.');
     }
 
-    // const deleteUser = await this.userRepository.delete(data);
-
-    // console.log(deleteUser)
-
     return this.addressRepository.delete(data);
   }
 }

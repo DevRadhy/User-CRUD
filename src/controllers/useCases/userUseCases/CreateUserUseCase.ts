@@ -37,7 +37,7 @@ export class CreateUserUseCase {
       state: address.state,
     }
     
-    const createUser = this.userRepository.create(user);
+    const createUser = await this.userRepository.create(user);
 
     const userAddress = await createAddressUseCase.create(addressData);
     

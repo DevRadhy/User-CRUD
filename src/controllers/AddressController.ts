@@ -41,4 +41,18 @@ export class AddressController {
          });
        }
    }
+
+   async delete(request: Request, response: Response): Promise<Response> {
+      const { user_id } = request.body;
+  
+      try {
+        const address = await this.deleteAddressUseCase.delete({ user_id });
+  
+        return response.json(address);
+      }catch (err) {
+        return response.status(400).json({
+          error: err.message
+        });
+      }
+    }
 }

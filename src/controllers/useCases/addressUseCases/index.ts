@@ -30,4 +30,4 @@ const addressController = new AddressController(
   showAddress,
 );
 
-export { addressController, createAddressUseCase };
+export { addressController, createAddressUseCase, deleteAddress };

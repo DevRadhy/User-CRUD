@@ -4,22 +4,34 @@ import { Address, CEP, City, State } from "../entities/Address";
 
 export class AddressRepository {
   async getPrimaryAddress(cep: string, city: string, state: string) {
-    const InsertedCep = await getConnection()
-    .getRepository(CEP)
-    .save({ cep });
+    // Pega o repositório de CEP, City e State
+    const cepRepository = await getConnection()
+    .getRepository(CEP);
 
-    const InsertedCity = await getConnection()
-    .getRepository(City)
-    .save({ city });
+    const cityRepository = await getConnection()
+    .getRepository(City);
 
-    const InsertedState = await getConnection()
-    .getRepository(State)
-    .save({ state });
+    const stateRepository = await getConnection()
+    .getRepository(State);
 
-    return { 
-      cep_id: InsertedCep.id,
-      city_id: InsertedCity.id,
-      state_id: InsertedState.id,
+    // Verifia se existe CEP, City e State
+    const findCep = await cepRepository
+    .findOne({ cep });
+
+    const findCity = await cityRepository
+    .findOne({ city });
+
+    const findState = await stateRepository
+    .findOne({ state });
+
+    const cep_id = findCep ?? await cepRepository.save({ cep });
+    const city_id = findCity ?? await cityRepository.save({ city });
+    const state_id = findState ?? await stateRepository.save({ state });
+
+    return {
+      cep_id: cep_id.id,
+      city_id: city_id.id,
+      state_id: state_id.id,
     };
   }
 

@@ -12,6 +12,14 @@ export class UserRepository {
   }
 
   async delete({id, email}: IDeleteUser): Promise<boolean> {
+    const user = await getConnection()
+    .getRepository(User);
+
+    const userToRemove = await user
+    .findOne({ id, email });
+
+    await user.remove(userToRemove as User);
+
     return true;
   }
 

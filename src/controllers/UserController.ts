@@ -48,7 +48,7 @@ export class UserController {
     try {
       const user = await this.deleteUserUseCase.delete({ id, email });
 
-      return response.status(200).json(user);
+      return response.json(user);
     }catch (err) {
       return response.status(400).json({
         error: err.message
