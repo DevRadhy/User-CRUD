@@ -6,7 +6,7 @@ export class DeleteUserUseCase {
     private userRepository: UserRepository,
   ){}
   
-  async delete(data: IDeleteUser) {
+  async delete(data: IDeleteUser): Promise<boolean> {
     const userAlreadyExists = true;
 
     if (!userAlreadyExists) {

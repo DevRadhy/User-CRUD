@@ -7,13 +7,13 @@ export class ShowAddressUseCase {
   ){}
   
   async index(user_id: string): Promise<Address> {
-    const showUser = await this.addressRepository.index(user_id);
+    const showAddress = await this.addressRepository.index(user_id);
 
-    if (!showUser) {
+    if (!showAddress) {
       throw new Error('Address does not exists.');
     }
 
-    return showUser;
+    return showAddress;
   }
 
   async show(): Promise<Address[]> {

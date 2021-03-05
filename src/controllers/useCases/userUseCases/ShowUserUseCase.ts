@@ -1,23 +1,24 @@
 import { UserRepository } from "../../../database/UserRepository";
+import { User } from "../../../entities/User";
 
 export class ShowUserUseCase {
   constructor(
     private userRepository: UserRepository,
   ){}
   
-  async index(id: string) {
-    const userAlreadyExists = true;
-
-    if (!userAlreadyExists) {
-      throw new Error('User do not exists.');
-    }
-
+  async index(id: string): Promise<User> {
     const showUser = await this.userRepository.index(id);
+
+    if (!showUser) {
+      throw new Error('Address does not exists.');
+    }
 
     return showUser;
   }
 
-  async show() {
+  async show():Promise<User[]> {
     const showUser = await this.userRepository.show();
+
+    return showUser
   }
 }

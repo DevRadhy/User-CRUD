@@ -39,10 +39,10 @@ export class AddressRepository {
     return createAddress;
   }
 
-  async execute({ user_id, address, number, complement,  cep_id, city_id, state_id, }: Address) {
+  async execute({ user_id, address, number, complement,  cep_id, city_id, state_id, }: Address): Promise<Address> {
     const addressRepository = getRepository(Address);
 
-    const updateUser = await addressRepository.update(user_id, {
+    const updateAddress = await addressRepository.update(user_id, {
       address,
       number,
       complement,
@@ -51,13 +51,13 @@ export class AddressRepository {
       state_id,
     });
 
-    if (updateUser.affected === 0) {
+    if (updateAddress.affected === 0) {
       throw new Error('Address does not exists.');
     }
 
-    const updatedUser = await addressRepository.findOne({ user_id });
+    const updatedAddress = await addressRepository.findOne({ user_id });
 
-    return updatedUser;
+    return updatedAddress as Address;
   }
 
   async index(user_id: string): Promise<Address> {

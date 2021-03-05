@@ -48,7 +48,10 @@ export class UserController {
     try {
       const user = await this.deleteUserUseCase.delete({ id, email });
 
-      return response.json(user);
+      return response.json({
+        userDeleted: user,
+        message: 'Usuário excluído com sucesso.'
+      });
     }catch (err) {
       return response.status(400).json({
         error: err.message
@@ -65,21 +68,23 @@ export class UserController {
       phone,
       weight,
       ethnicity_id,
-      address } = request.body
+      address
+    } = request.body
 
     try {
       const user = await this.updateUserUseCase.execute(
-        id,
         {
-        name,
-        age,
-        email,
-        phone,
-        weight,
-        ethnicity_id,
-        address, });
+          id,
+          name,
+          age,
+          email,
+          phone,
+          weight,
+          ethnicity_id,
+          address,
+        });
 
-      return response.json({ id: user });
+      return response.json(user);
     }catch (err) {
       return response.status(400).json({
         error: err.message
