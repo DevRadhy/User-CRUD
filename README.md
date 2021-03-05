@@ -26,8 +26,8 @@ Rotas para autenticação de usuário.
 POST '/login'
 ```
 
-> Usage
-> 
+> Usage POST '/login' 
+
 ```json
 {
   "email": "user@mail.com"
@@ -65,8 +65,13 @@ GET '/user/:id'
 GET '/list-users'
 ```
 
-> Usage
+> Usage POST '/user'
+
 > Ethnicities: 1.Brancos, 2.Pardos, 3.Pretos, 4.Amarelos, 5.Indigenas, 6.Outros
+
+```http
+authorizatoin: Bearer JWT-TOKEN
+```
 
 ```json
 {
