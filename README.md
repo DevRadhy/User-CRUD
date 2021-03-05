@@ -171,12 +171,12 @@ authorization: Bearer TOKEN
 
 ```json
 {
-  "address": "R. 7 de Setembro",
+  "address": "Av. NOME DA AVENIDA",
   "number": 0,
   "complement": "casa",
   "cep": "12345000",
-  "city": "Timbó Grande",
-  "state": "Santa Catarina"
+  "city": "CIDADE",
+  "state": "ESTADO"
 }
 ```
 
