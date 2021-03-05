@@ -3,7 +3,15 @@ import { Router } from 'express';
 import { userController } from './controllers/useCases/userUseCases';
 import { addressController } from './controllers/useCases/addressUseCases';
 
+import { authentication } from './Middlewares/Auth';
+import { authController } from './controllers/Auth';
+
 const router = Router();
+
+// Rota de login
+router.post('/login', (request, response) => {
+  return authController.authenticate(request, response);
+})
 
 // Rota para criação de usuário
 router.post('/user', (request, response) => {
@@ -11,12 +19,12 @@ router.post('/user', (request, response) => {
 });
 
 // Rota para deletar um usuário
-router.post('/delete-user', (request, response) => {
+router.delete('/delete-user', authentication.authorizate, (request, response) => {
   return userController.delete(request, response);
 });
 
 // Rota para atualizar um usuário
-router.patch('/user/:id', (request, response) => {
+router.patch('/user/:id', authentication.authorizate, (request, response) => {
   return userController.execute(request, response);
 });
 
@@ -30,13 +38,8 @@ router.get('/list-users', (request, response) => {
   return userController.show(request, response);
 });
 
-// Rota para criar um endereço
-router.post('/address', (request, response) => {
-  return addressController.create(request, response);
-});
-
 // Rota para atualizar um endereço
-router.patch('/update-address/:id', (request, response) => {
+router.patch('/update-address/:id', authentication.authorizate, (request, response) => {
   return addressController.execute(request, response);
 });
 

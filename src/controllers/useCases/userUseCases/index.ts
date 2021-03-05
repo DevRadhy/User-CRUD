@@ -4,8 +4,13 @@ import { UserRepository } from "../../../database/UserRepository";
 import { DeleteUserUseCase } from "./DeleteUserUseCase";
 import { UpdateUserUseCase } from "./UpdateUserUseCase";
 import { ShowUserUseCase } from "./ShowUserUseCase";
+import { AutheticateUserUseCase } from "./AuthenticateUserUseCase";
 
 const userRepository = new UserRepository();
+
+const authenticateUserUseCase = new AutheticateUserUseCase(
+  userRepository,
+);
 
 const createUserUseCase = new CreateUserUseCase(
   userRepository,
@@ -30,4 +35,4 @@ const userController = new UserController(
   showUser,
 );
 
-export { userController };
+export { userController, authenticateUserUseCase };

@@ -10,18 +10,17 @@ const createAddressUseCase = new CreateAddressUseCase(
   addressRepository,
 );
 
-const updateAddress = new UpdateAddressUseCase(
+const updateAddressUseCase = new UpdateAddressUseCase(
   addressRepository,
 );
 
-const showAddress = new ShowAddressUseCase(
+const showAddressUseCase = new ShowAddressUseCase(
   addressRepository,
 );
 
 const addressController = new AddressController(
-  createAddressUseCase,
-  updateAddress,
-  showAddress,
+  updateAddressUseCase,
+  showAddressUseCase,
 );
 
 export { addressController, createAddressUseCase };

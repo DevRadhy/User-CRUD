@@ -4,6 +4,8 @@ import { DeleteUserUseCase } from "./useCases/userUseCases/DeleteUserUseCase";
 import { ShowUserUseCase } from "./useCases/userUseCases/ShowUserUseCase";
 import { UpdateUserUseCase } from "./useCases/userUseCases/UpdateUserUseCase";
 
+import { userScheme } from "../Providers/Validator/UserValidator";
+
 export class UserController {
    constructor(
     private createUserUseCase: CreateUserUseCase,
@@ -24,6 +26,8 @@ export class UserController {
     } = request.body;
 
       try {
+        await userScheme.validate(request.body, { abortEarly: false });
+
         const user = await this.createUserUseCase.create({
           name,
           age,
@@ -34,6 +38,7 @@ export class UserController {
           address,
         });
 
+
         return response.status(201).json(user);
       }catch (err) {
         return response.status(400).json({
@@ -43,7 +48,8 @@ export class UserController {
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
-    const { id, email } = request.body;
+    const id = request.user_id;
+    const { email } = request.body;
 
     try {
       const user = await this.deleteUserUseCase.delete({ id, email });
@@ -60,7 +66,7 @@ export class UserController {
   }
 
   async execute(request: Request, response: Response): Promise<Response> {
-    const { id } = request.params;
+    const id = request.user_id;
     const {
       name,
       age,
@@ -72,6 +78,8 @@ export class UserController {
     } = request.body
 
     try {
+      userScheme.validate(request.body, { abortEarly: false });
+
       const user = await this.updateUserUseCase.execute(
         {
           id,

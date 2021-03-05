@@ -3,13 +3,25 @@ import { IDeleteUser, IUser } from "../controllers/useCases/userUseCases/UserDTO
 import { User } from "../entities/User";
 
 export class UserRepository {
-  async create(user: User): Promise<User> {
+  async findUserByEmail(email: string): Promise<User> {
     const userRepository = getRepository(User);
 
-    const findUser = userRepository.findOne({ id: user.id });
+    const findUser = userRepository.findOneOrFail({ email });
 
     if (!findUser) {
       throw new Error('User does not exists.');
+    }
+
+    return findUser;
+  }
+
+  async create(user: User): Promise<User> {
+    const userRepository = getRepository(User);
+
+    const findUser = await userRepository.findOne({ where: { email: user.email } });
+
+    if (findUser) {
+      throw new Error('User already exists.');
     }
 
     const createUser = await userRepository.save(user);
