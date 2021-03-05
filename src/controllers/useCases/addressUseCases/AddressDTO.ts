@@ -7,7 +7,3 @@ export interface ICreateAddress {
   city: string,
   state: string,
 }
-
-export interface IDeleteAddress {
-  user_id: string;
-}

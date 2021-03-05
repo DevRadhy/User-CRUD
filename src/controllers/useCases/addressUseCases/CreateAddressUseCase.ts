@@ -8,18 +8,12 @@ export class CreateAddressUseCase {
   ){}
 
   async create({ user_id, address, number, complement, cep, city, state }: ICreateAddress) {
-    const userAlreadyExists = false;
-
-    if (userAlreadyExists) {
-      throw new Error('User already exists.');
-    }
-
     const addressCep = new CEP({ cep });
     const addressCity = new City({ city });
     const addressState = new State({ state });
 
     const { cep_id, city_id, state_id } = await this.addressRepository
-    .getPrimaryAddress(
+    .getEssentialAddress(
       addressCep.cep,
       addressCity.city,
       addressState.state

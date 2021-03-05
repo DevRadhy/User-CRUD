@@ -1,23 +1,24 @@
 import { AddressRepository } from "../../../database/AddressRepository";
+import { Address } from "../../../entities/Address";
 
 export class ShowAddressUseCase {
   constructor(
     private addressRepository: AddressRepository,
   ){}
   
-  async index(id: string) {
-    const userAlreadyExists = true;
+  async index(user_id: string): Promise<Address> {
+    const showUser = await this.addressRepository.index(user_id);
 
-    if (!userAlreadyExists) {
-      throw new Error('User do not exists.');
+    if (!showUser) {
+      throw new Error('Address does not exists.');
     }
-
-    const showUser = await this.addressRepository.index(id);
 
     return showUser;
   }
 
-  async show() {
-    const showUser = await this.addressRepository.show();
+  async show(): Promise<Address[]> {
+    const showUsers = await this.addressRepository.show();
+
+    return showUsers;
   }
 }

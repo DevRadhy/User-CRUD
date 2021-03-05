@@ -1,20 +1,16 @@
-import { getConnection } from "typeorm";
-import { ICreateAddress, IDeleteAddress } from "../controllers/useCases/addressUseCases/AddressDTO";
+import { getRepository } from "typeorm";
 import { Address, CEP, City, State } from "../entities/Address";
 
 export class AddressRepository {
-  async getPrimaryAddress(cep: string, city: string, state: string) {
+  async getEssentialAddress(cep: string, city: string, state: string) {
     // Pega o repositório de CEP, City e State
-    const cepRepository = await getConnection()
-    .getRepository(CEP);
+    const cepRepository = getRepository(CEP);
 
-    const cityRepository = await getConnection()
-    .getRepository(City);
+    const cityRepository = getRepository(City);
 
-    const stateRepository = await getConnection()
-    .getRepository(State);
+    const stateRepository = getRepository(State);
 
-    // Verifia se existe CEP, City e State
+    // Verifica se existe CEP, City e State
     const findCep = await cepRepository
     .findOne({ cep });
 
@@ -36,26 +32,60 @@ export class AddressRepository {
   }
 
   async create(address: Address): Promise<Address> {
-    const createAddress = await getConnection()
-    .getRepository(Address)
-    .save(address);
+    const addressRepository = getRepository(Address);
+
+    const createAddress = await addressRepository.save(address);
 
     return createAddress;
   }
 
-  async delete(props: IDeleteAddress): Promise<boolean> {
-    return true;
+  async execute({ user_id, address, number, complement,  cep_id, city_id, state_id, }: Address) {
+    const addressRepository = getRepository(Address);
+
+    const updateUser = await addressRepository.update(user_id, {
+      address,
+      number,
+      complement,
+      cep_id,
+      city_id,
+      state_id,
+    });
+
+    if (updateUser.affected === 0) {
+      throw new Error('Address does not exists.');
+    }
+
+    const updatedUser = await addressRepository.findOne({ user_id });
+
+    return updatedUser;
   }
 
-  async execute(id: string, props: ICreateAddress): Promise<string> {
-    return id;
+  async index(user_id: string): Promise<Address> {
+    const addressRepository = getRepository(Address);
+
+    const address = await addressRepository.findOne(
+      {
+        user_id,
+      },
+      {
+        relations: [
+          "cep_id",
+          "city_id",
+          "state_id",
+        ]
+      });
+
+    return address as Address;
   }
 
-  async index(id: string): Promise<void> {
-    return;
-  }
+  async show(): Promise<Address[]> {
+    const addresses = await getRepository(Address)
+    .find({ relations: [
+      "cep_id",
+      "city_id",
+      "state_id",
+    ] });
 
-  async show(): Promise<void> {
-    return;
+    return addresses;
   }
 }
