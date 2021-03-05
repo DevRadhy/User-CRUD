@@ -27,24 +27,6 @@ Rotas para autenticação de usuário.
 POST '/login'
 ```
 
-> Usage POST '/login' 
-
-```json
-{
-  "email": "user@mail.com"
-}
-```
-
-> Return
-
-```json
-{
-  "id": "UUID-FORMAT",
-  "auth": true,
-  "token": "JWT-TOKEN"
-}
-```
-
 ### Routes - User
 
 Rotas para CRUD de usuário.
@@ -66,57 +48,7 @@ GET '/user/:id'
 GET '/list-users'
 ```
 
-> Usage POST '/user'
 
-> Ethnicities: 1.Brancos, 2.Pardos, 3.Pretos, 4.Amarelos, 5.Indigenas, 6.Outros
-
-```http
-authorizatoin: Bearer JWT-TOKEN
-```
-
-```json
-{
-	"name": "User",
-	"age": "18",
-	"email": "user@mail.com",
-	"phone": "(00) 9 12345678",
-	"weight": "50",
-	"ethnicity_id": "ETNIA",
-	"address": {
-		"address": "R. NOME DA RUA",
-		"number": 0,
-		"complement": "casa",
-		"cep": "12345-000",
-		"city": "CIDADE",
-		"state": "ESTADO"
-	}
-}
-```
-
-> Return
-
-```json
-{
-  "createUser": {
-    "name": "User",
-    "age": "18",
-    "email": "user@mail.com",
-    "phone": "(00) 9 12345678",
-    "weight": "50",
-    "ethnicity_id": 6,
-    "id": "UUID-FORMAT"
-  },
-  "userAddress": {
-    "user_id": "UUID-FORMAT",
-    "address": "R. NOME DA RUA",
-    "number": 0,
-    "complement": "casa",
-    "cep_id": 6,
-    "city_id": 6,
-    "state_id": 6
-  }
-}
-```
 
 ### Routes - Address
 
@@ -135,6 +67,98 @@ GET '/addresses'
 
 ## Usage
 
+### Auth
+
+### Login
+
+> POST '/login'
+
+```json
+{
+  "email": "user@mail.com"
+}
+```
+
+### User
+
+### Criar um usuário
+
+> POST '/user'
+
+> Ethnicities: 1.Brancos, 2.Pardos, 3.Pretos, 4.Amarelos, 5.Indigenas, 6.Outros
+
+```http
+authorizatoin: Bearer JWT-TOKEN
+```
+
+```json
+{
+  "name": "User",
+  "age": "18",
+  "email": "user@mail.com",
+  "phone": "(00) 9 12345678",
+  "weight": "50",
+  "ethnicity_id": "ETNIA",
+  "address": {
+    "address": "R. 7 de Setembro",
+    "number": 0,
+    "complement": "casa",
+    "cep": "12345-000",
+    "city": "CIDADE",
+    "state": "ESTADO"
+  }
+}
+```
+
+### Deletar um usuário
+
+> DELETE '/delete-user'
+
+```http
+authorizatoin: Bearer JWT-TOKEN
+```
+
+```json
+{
+  "email": "user@mail.com"
+}
+```
+
+### Atualizar um usuário
+
+> PATCH '/user/:id'
+
+```http
+authorizatoin: Bearer JWT-TOKEN
+```
+
+```json
+{
+  "name": "User",
+  "age": "18",
+  "email": "user@mail.com.br",
+  "phone": "(00) 9 12345678",
+  "weight": "52",
+  "ethnicity_id": "ETNIA"
+}
+```
+
+### Listar um usuário
+
+> GET '/user/:id'
+
+```
+host:port/user/4a965989-6342-43a6-b68b-0e7637808dc6
+```
+
+### Listar todos os usuários
+
+> GET '/users'
+
+```
+host:port/users
+```
+
 ### Address
 
 ### Atualizar um endereço
@@ -147,12 +171,12 @@ authorization: Bearer TOKEN
 
 ```json
 {
-"address": "R. 7 de Setembro",
-"number": 0,
-"complement": "casa",
-"cep": "12345000",
-"city": "Timbó Grande",
-"state": "Santa Catarina"
+  "address": "R. 7 de Setembro",
+  "number": 0,
+  "complement": "casa",
+  "cep": "12345000",
+  "city": "Timbó Grande",
+  "state": "Santa Catarina"
 }
 ```
 
@@ -160,6 +184,14 @@ authorization: Bearer TOKEN
 
 > GET '/address/:id'
 
+```
+//host:port/address/4a965989-6342-43a6-b68b-0e7637808dc6
+```
+
 ### Listar todos os usuários
 
-> GET 'addresses'
+> GET 'addresses' 
+
+```
+//host:port/addresses
+```
