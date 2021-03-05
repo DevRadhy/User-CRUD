@@ -38,7 +38,7 @@ POST '/login'
 
 ```json
 {
-  "id": "uuid",
+  "id": "UUID-FORMAT",
   "auth": true,
   "token": "JWT-TOKEN"
 }
@@ -63,6 +63,53 @@ GET '/user/:id'
 
 // Rota para mostrar todos os usuário
 GET '/list-users'
+```
+
+> Usage
+> Ethnicities: 1.Brancos, 2.Pardos, 3.Pretos, 4.Amarelos, 5.Indigenas, 6.Outros
+
+```json
+{
+	"name": "User",
+	"age": "18",
+	"email": "user@mail.com",
+	"phone": "(00) 9 12345678",
+	"weight": "50",
+	"ethnicity_id": "ETNIA",
+	"address": {
+		"address": "R. NOME DA RUA",
+		"number": 0,
+		"complement": "casa",
+		"cep": "12345-000",
+		"city": "CIDADE",
+		"state": "ESTADO"
+	}
+}
+```
+
+> Return
+
+```json
+{
+  "createUser": {
+    "name": "User",
+    "age": "18",
+    "email": "user@mail.com",
+    "phone": "(00) 9 12345678",
+    "weight": "50",
+    "ethnicity_id": 6,
+    "id": "UUID-FORMAT"
+  },
+  "userAddress": {
+    "user_id": "UUID-FORMAT",
+    "address": "R. NOME DA RUA",
+    "number": 0,
+    "complement": "casa",
+    "cep_id": 6,
+    "city_id": 6,
+    "state_id": 6
+  }
+}
 ```
 
 ### Address
