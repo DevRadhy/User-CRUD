@@ -9,6 +9,7 @@ API para cadastro de usuário com endereço, feita com **Node.js** e **Typescrip
 Você pode navegar usando os tópicos.
 
 * **[Rotas](#rotas)**
+* **[Usage](#usage)**
   * **[Auth](#auth)**
   * **[User](#user)**
   * **[Address](#address)**
@@ -17,7 +18,7 @@ Você pode navegar usando os tópicos.
 
 Aqui você pode ver quais são as rotas e como usar.
 
-### Auth
+### Routes - Auth
 
 Rotas para autenticação de usuário.
 
@@ -44,7 +45,7 @@ POST '/login'
 }
 ```
 
-### User
+### Routes - User
 
 Rotas para CRUD de usuário.
 
@@ -117,7 +118,7 @@ authorizatoin: Bearer JWT-TOKEN
 }
 ```
 
-### Address
+### Routes - Address
 
 Rotas para CRUD de Address.
 
@@ -131,3 +132,34 @@ GET '/address/:id'
 // Rota para listar todos os endereços
 GET '/addresses'
 ```
+
+## Usage
+
+### Address
+
+### Atualizar um endereço
+
+> PATCH '/update-address/:id'
+
+```http
+authorization: Bearer TOKEN
+```
+
+```json
+{
+"address": "R. 7 de Setembro",
+"number": 0,
+"complement": "casa",
+"cep": "12345000",
+"city": "Timbó Grande",
+"state": "Santa Catarina"
+}
+```
+
+### Listar um usuário
+
+> GET '/address/:id'
+
+### Listar todos os usuários
+
+> GET 'addresses'
