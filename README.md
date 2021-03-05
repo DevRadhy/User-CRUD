@@ -4,7 +4,7 @@
 
 API para cadastro de usuário com endereço, feita com **Node.js** e **Typescript**.
 
-## Tópicos
+## Tópicos :ok_person:
 
 Você pode navegar usando os tópicos.
 
@@ -67,7 +67,7 @@ GET '/addresses'
 
 ## Usage
 
-### Auth
+## Auth
 
 ### Login
 
@@ -79,7 +79,7 @@ GET '/addresses'
 }
 ```
 
-### User
+## User
 
 ### Criar um usuário
 
@@ -159,7 +159,7 @@ host:port/user/4a965989-6342-43a6-b68b-0e7637808dc6
 host:port/users
 ```
 
-### Address
+## Address
 
 ### Atualizar um endereço
 
