@@ -4,6 +4,15 @@
 
 API para cadastro de usuário com endereço, feita com **Node.js** e **Typescript**.
 
+## Tópicos
+
+Você pode navegar usando os tópicos.
+
+* **[Rotas](#rotas)**
+  * **[Auth](#auth)**
+  * **[User](#user)**
+  * **[Address](#address)**
+
 ## Rotas
 
 Aqui você pode ver quais são as rotas e como usar.
@@ -15,6 +24,24 @@ Rotas para autenticação de usuário.
 ```http
 // Rota de login
 POST '/login'
+```
+
+> Usage
+> 
+```json
+{
+  "email": "user@mail.com"
+}
+```
+
+> Return
+
+```json
+{
+  "id": "uuid",
+  "auth": true,
+  "token": "JWT-TOKEN"
+}
 ```
 
 ### User
