@@ -14,6 +14,8 @@ Você pode navegar usando os tópicos.
   * **[User](#user)**
   * **[Address](#address)**
 
+**Note: Para autenticação de JWT a API está usando somente o email por meio de simplicidade.**
+
 ## Rotas
 
 Aqui você pode ver quais são as rotas e como usar.
